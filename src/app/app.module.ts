@@ -28,7 +28,7 @@ import { BasicAuthHttpInterceptorService } from "./service/basic-auth-http-inter
     LogoutComponent
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule,FormsModule],
-  providers: [HttpClientService, AuthenticationService,{ provide:HTTP_INTERCEPTORS, useClass:BasicAuthHtppInterceptorService, multi:true }],
+  providers: [HttpClientService, AuthenticationService,{ provide:HTTP_INTERCEPTORS, useClass:BasicAuthHttpInterceptorService, multi:true }],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
