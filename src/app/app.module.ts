@@ -27,7 +27,7 @@ import { FormsModule } from "@angular/forms";
     LogoutComponent
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule,FormsModule],
-  providers: [HttpClientService, AuthenticationService],
+  providers: [HttpClientService, AuthenticationService,{ provide:HTTP_INTERCEPTORS, useClass:BasicAuthHtppInterceptorService, multi:true }],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
