@@ -1,0 +1,21 @@
+<div class="col-md-12">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>REG IG</th>
+        <th>NAME</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let student of students">
+        <td>{{student.id}}</td>
+        <td>{{student.title}}</td>
+        <td>
+          <button class="btn btn-danger" (click)="deleteStudent(student)">
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
