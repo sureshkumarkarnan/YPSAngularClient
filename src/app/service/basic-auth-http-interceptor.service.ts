@@ -10,6 +10,14 @@ export class BasicAuthHttpInterceptorService implements HttpInterceptor{
   constructor() { }
 
 intercept(req: HttpRequest<any>, next: HttpHandler) {
-      return next.handle(req);
+  if (sessionStorage.getItem('username') && sessionStorage.getItem('basicauth')) {
+      req = req.clone({
+        setHeaders: {
+          Authorization : sessionStorage.getItem('basicauth')
+        }
+      })
+  }
+     return next.handle(req);
 }
 }
+
