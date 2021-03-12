@@ -10,6 +10,6 @@ export class BasicAuthHttpInterceptorService implements HttpInterceptor{
   constructor() { }
 
 intercept(req: HttpRequest<any>, next: HttpHandler) {
-  
+      return next.handle(req);
 }
 }
