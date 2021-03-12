@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { HttpClientService } from "../service/http-client.service";
+import { HttpClientService, Student } from "../service/http-client.service";
 
 @Component({
   selector: "students",
@@ -21,4 +21,9 @@ export class StudentComponent implements OnInit {
       .getStudents()
       .subscribe((response) => this.handleSuccessfulResponse(response));
   }
+
+    deleteStudent(student : Student) : void{
+    
+  }
+
 }
