@@ -8,7 +8,7 @@
       <li>
         <a
           *ngIf="!loginService.isUserLoggedIn()"
-          routerLink="/login"
+          routerLink="login"
           class="nav-link"
         >
           Login
@@ -18,7 +18,7 @@
       <li>
         <a
           *ngIf="loginService.isUserLoggedIn()"
-          routerLink="/"
+          routerLink=""
           class="nav-link"
         >
           Home
@@ -27,7 +27,7 @@
       <li>
         <a
           *ngIf="loginService.isUserLoggedIn()"
-          routerLink="/students"
+          routerLink="students"
           class="nav-link"
         >
           Students
@@ -36,7 +36,7 @@
       <li>
         <a
           *ngIf="loginService.isUserLoggedIn()"
-          routerLink="/logout"
+          routerLink="logout"
           class="nav-link"
         >
           Logout
