@@ -9,6 +9,10 @@ export class User{
   
 }
 
+export class JwtResponse {
+  constructor( public jwttoken:string) {}
+}
+
 @Injectable({
   providedIn: "root"
 })
@@ -16,14 +20,15 @@ export class AuthenticationService {
 constructor(    private httpClient:HttpClient ) {      }
 
   authenticate(username, password) {
-     const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
+//const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
     console.log("in autenticate");
-    return this.httpClient.get<User>('http://localhost:8080/login',{headers}).pipe(
+
+    return this.httpClient.post<any>('http://localhost:8080/login',{username,password}).pipe(
      map(
        userData => {
         sessionStorage.setItem('username',username);
-        let authString = 'Basic ' + btoa(username + ':' + password);
-          sessionStorage.setItem('basicauth', authString);
+        let authString = 'Bearer ' + userData.token;
+          sessionStorage.setItem('token', authString);
         return userData;
        }
      )
