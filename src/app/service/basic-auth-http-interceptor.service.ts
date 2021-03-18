@@ -7,15 +7,17 @@ import { AuthenticationService } from './authentication.service';
 })
 export class BasicAuthHttpInterceptorService implements HttpInterceptor{
 
-  constructor() { }
+  constructor(private authenticationService: AuthenticationService) {}
 
 intercept(req: HttpRequest<any>, next: HttpHandler) {
-  if (sessionStorage.getItem('username') && sessionStorage.getItem('token')) {
+  let currentUser = this.authenticationService.currentUserValue;
+if (currentUser && currentUser.token) {
+
       req = req.clone({
         setHeaders: {
-          Authorization : sessionStorage.getItem('tokens')
+          Authorization : 'Bearer ${currentUser.token}'
         }
-      })
+      });
   }
      return next.handle(req);
 }

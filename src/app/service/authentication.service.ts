@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 export class User{
   constructor(
@@ -17,30 +18,37 @@ export class JwtResponse {
   providedIn: "root"
 })
 export class AuthenticationService {
-constructor(    private httpClient:HttpClient ) {      }
 
-  authenticate(username, password) {
-//const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
+private currentUserSubject: BehaviorSubject<any>;
+    public currentUser: Observable<any>;
+
+constructor(    private httpClient:HttpClient ) {  
+this.currentUserSubject = new BehaviorSubject<any>(JSON.parse(sessionStorage.getItem('currentUser')));
+        this.currentUser = this.currentUserSubject.asObservable();
+		}
+
+public get currentUserValue() {
+        return this.currentUserSubject.value;
+    }
+	
+  authenticate(username, password)  {
     console.log("in autenticate");
-
-    return this.httpClient.post<any>('http://localhost:8080/login',{username,password}).pipe(
-     map(
-       userData => {
-        sessionStorage.setItem('username',username);
-        let authString = 'Bearer ' + userData.token;
-          sessionStorage.setItem('token', authString);
-        return userData;
-       }
-     )
-
-    );
+	const body = { username : username,password : password };
+    return this.httpClient.post<any>('http://localhost:8080/login',body )
+		.pipe(map(user => {
+        sessionStorage.setItem('currentUser', JSON.stringify(user));
+		this.currentUserSubject.next(user);
+        console.log(user);
+		return user;
+    }));
   }
   isUserLoggedIn() {
-    let user = sessionStorage.getItem("username");
+    let user = sessionStorage.getItem("currentUser");
    // console.log(!(user === null));
     return !(user === null);
   }
   logOut() {
-    sessionStorage.removeItem("username");
+    sessionStorage.removeItem("currentUser");
+	this.currentUserSubject.next(null);
   }
 }
