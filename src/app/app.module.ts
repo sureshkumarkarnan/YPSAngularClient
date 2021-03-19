@@ -16,6 +16,7 @@ import { LogoutComponent } from "./logout/logout.component";
 import { AuthenticationService } from "./service/authentication.service";
 import { FormsModule } from "@angular/forms";
 import { BasicAuthHttpInterceptorService } from "./service/basic-auth-http-interceptor.service";
+import { FakeHTTPInterceptorService } from "./service/fake-httpinterceptor.service";
 
 @NgModule({
   declarations: [
@@ -28,7 +29,10 @@ import { BasicAuthHttpInterceptorService } from "./service/basic-auth-http-inter
     LogoutComponent
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule,FormsModule],
-  providers: [HttpClientService, AuthenticationService,{ provide:HTTP_INTERCEPTORS, useClass:BasicAuthHttpInterceptorService, multi:true }],
+  providers: [HttpClientService, AuthenticationService,
+ /* { provide:HTTP_INTERCEPTORS, useClass:BasicAuthHttpInterceptorService, multi:true },*/
+  { provide:HTTP_INTERCEPTORS, useClass:FakeHTTPInterceptorService, multi:true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
