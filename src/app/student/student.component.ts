@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 import { HttpClientService, Student } from "../service/http-client.service";
 
 @Component({
@@ -8,7 +9,7 @@ import { HttpClientService, Student } from "../service/http-client.service";
 })
 export class StudentComponent implements OnInit {
   public students = [];
-  constructor(private httpClientService: HttpClientService) {}
+  constructor(private  router : Router,private httpClientService: HttpClientService) {}
 
   handleSuccessfulResponse(response) {
      console.log(response);
@@ -39,6 +40,10 @@ getStudents() : void{
       error => {
         console.log(error);
       });
+  }
+
+  addStudent() : void {
+  this.router.navigate(['add-student']);
   }
 
 }
