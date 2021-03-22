@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
+import { Observable } from "rxjs";
 
 export class Student {
   constructor(public id: string, public title: string) {}
@@ -12,7 +13,7 @@ export class HttpClientService {
   private baseUrl : string = 'http://localhost:8080/Students/';
   constructor(private httpClient: HttpClient) {}
 
-  getStudents() {
+  getStudents():Observable<any> {
     console.log("i am at getStudents");
     return this.httpClient.get<Student[]>(this.baseUrl);
   }
@@ -20,7 +21,7 @@ export class HttpClientService {
 getStudentById ( id:number) {
   return this.httpClient.get<Student>(this.baseUrl + id);
 }
-  deleteStudent(student : Student) {
+  deleteStudent(student : Student): Observable<any>{
     return this.httpClient.delete(this.baseUrl + student.id);
   }
 
