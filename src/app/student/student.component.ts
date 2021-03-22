@@ -11,19 +11,34 @@ export class StudentComponent implements OnInit {
   constructor(private httpClientService: HttpClientService) {}
 
   handleSuccessfulResponse(response) {
+     console.log(response);
     this.students = response;
+    
   }
 
   ngOnInit() {
     // this.httpClientService.getStudents().subscribe((data) => {
     //  this.users = Array.from(Object.keys(data), (k) => data[k]);
-    this.httpClientService
+    this.getStudents();
+    }
+
+getStudents() : void{
+ this.httpClientService
       .getStudents()
       .subscribe((response) => this.handleSuccessfulResponse(response));
-  }
+ 
 
-    deleteStudent(student : Student) : void{
+}
+    deleteStudent(student : Student) : void {
     
+    this.httpClientService.deleteStudent(student)
+    .subscribe((response) => { 
+      console.log(response);
+      this.getStudents();
+      },
+      error => {
+        console.log(error);
+      });
   }
 
 }
