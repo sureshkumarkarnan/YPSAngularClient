@@ -4,6 +4,7 @@ import { Observable, of, throwError } from 'rxjs';
 import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
 
 let users = JSON.parse(localStorage.getItem('users')) || [];
+let studentList  = JSON.parse(localStorage.getItem('studentList')) || [];
 
 @Injectable()
 export class FakeHTTPInterceptorService implements HttpInterceptor {
@@ -14,7 +15,20 @@ export class FakeHTTPInterceptorService implements HttpInterceptor {
        password : 'admin'
     }
     users.push(user);
+     const s = {
+       id : '2001',
+       title : 'suresh'
+    }
+
+    studentList.push(s);
+
+  const s2 = {
+       id : '2002',
+       title : 'kumar'
+    }
+studentList.push(s2);
      localStorage.setItem('users', JSON.stringify(users));
+     localStorage.setItem('students',JSON.stringify(studentList));
 
   }
 intercept(req: HttpRequest<any>,next: HttpHandler): Observable<HttpEvent<any>> {
@@ -30,11 +44,24 @@ return of(null)
             switch (true) {
                 case url.endsWith('/login') && method === 'POST':
                     return authenticate();
+                    case url.endsWith('/Students/') && method === 'GET':
+                    return getStudents();
+                    case url.endsWith('/Students/') && method === 'POST':
+                    return addStudent();
                      default:
                     // pass through any requests not handled above
                     return next.handle(req);
             }
         }
+
+        function getStudents() {
+              return ok(studentList);
+        }
+
+         function addStudent() {
+             const student = body;
+        }
+
         function authenticate() {
           const { username, password } = body;
            const user = users.find(x => x.username === username && x.password === password);
