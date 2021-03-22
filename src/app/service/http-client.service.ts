@@ -9,14 +9,27 @@ export class Student {
   providedIn: "root"
 })
 export class HttpClientService {
-  private apiurl = "https://jsonplaceholder.typicode.com/todos";
+  private baseUrl : string = 'http://localhost:8080/Students/';
   constructor(private httpClient: HttpClient) {}
 
   getStudents() {
     console.log("i am at getStudents");
-    // return this.httpClient.get(this.apiurl);
-    return this.httpClient.get<Student[]>(this.apiurl);
+    return this.httpClient.get<Student[]>(this.baseUrl);
   }
 
-  public deleteStudent(student) {}
+getStudentById ( id:number) {
+  return this.httpClient.get<Student>(this.baseUrl + id);
+}
+  deleteStudent(student : Student) {
+    return this.httpClient.delete(this.baseUrl + student.id);
+  }
+
+  createStudent(student:Student) {
+    return this.httpClient.post(this.baseUrl,student);
+  }
+
+updateStudent(student:Student) {
+    return this.httpClient.put(this.baseUrl+ student.id, student);
+  }
+
 }
