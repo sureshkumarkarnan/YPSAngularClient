@@ -17,6 +17,7 @@ import { AuthenticationService } from "./service/authentication.service";
 import { FormsModule } from "@angular/forms";
 import { BasicAuthHttpInterceptorService } from "./service/basic-auth-http-interceptor.service";
 import { FakeHTTPInterceptorService } from "./service/fake-httpinterceptor.service";
+import { AddStudentComponent } from "./student/add-student.component";
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { FakeHTTPInterceptorService } from "./service/fake-httpinterceptor.servi
     FooterComponent,
     StudentComponent,
     LoginComponent,
-    LogoutComponent
+    LogoutComponent,
+    AddStudentComponent
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule,FormsModule],
   providers: [HttpClientService, AuthenticationService,
