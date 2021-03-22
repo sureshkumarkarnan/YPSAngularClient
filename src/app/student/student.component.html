@@ -1,21 +1,20 @@
-<div class="col-md-12">
+<div class="col-md-6 user-container">
+  <h2 style="margin: auto"> LIST OF STUDENTS</h2>
+  <button class="btn btn-danger" style="width:150px" (click)="addStudent()"> Add Student</button>
   <table class="table table-striped">
     <thead>
-      <tr>
-        <th>REG IG</th>
-        <th>NAME</th>
-      </tr>
+    <tr>
+      <th class="hidden">ID</th>
+      <th>NAME</th>
+    </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let student of students">
-        <td>{{student.id}}</td>
-        <td>{{student.title}}</td>
-        <td>
-          <button class="btn btn-danger" (click)="deleteStudent(student)">
-            Delete
-          </button>
-        </td>
-      </tr>
+    <tr *ngFor="let student of students">
+      <td class="hidden">{{students.id}}</td>
+      <td>{{students.title}}</td>
+      <td><button class="btn btn-success" (click)="deleteStudent(student)"> Delete</button>
+        <button class="btn btn-success" (click)="UpdateStudent(student)" style="margin-left: 20px;"> Edit</button></td>
+    </tr>
     </tbody>
   </table>
 </div>
