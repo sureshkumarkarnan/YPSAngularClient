@@ -3,32 +3,66 @@ import { HttpRequest, HttpResponse, HttpHandler, HttpEvent, HttpInterceptor, HTT
 import { Observable, of, throwError } from 'rxjs';
 import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
 
-let users = JSON.parse(localStorage.getItem('users')) || [];
-let studentList  = JSON.parse(localStorage.getItem('studentList')) || [];
+
 
 @Injectable()
 export class FakeHTTPInterceptorService implements HttpInterceptor {
 
+    studentsList = [
+        {	
+            id : 1,
+            first_name : "Sangwin",
+            last_name : "Gawande",
+            email : "sangwin@yopmail.com",
+            phone : 9503733178,
+            department : "Science"
+        },
+        {
+            id : 2,
+            first_name : "Oman",
+            last_name : "Umir",
+            email : "oman@yopmail.com",
+            phone : 8574889658,
+            department : "Commerce"
+        },
+        {
+            id : 3,
+            first_name : "Tina",
+            last_name : "Dillon",
+            email : "tina@yopmail.com",
+            phone : 7485889658,
+            department : "Science"
+        },
+        {
+            id : 4,
+            first_name : "John",
+            last_name : "Doe",
+            email : "john@yopmail.com",
+            phone : 9685589748,
+            department : "Arts"
+        },
+        {
+            id : 5,
+            first_name : "Peter",
+            last_name : "Parker",
+            email : "peter@yopmail.com",
+            phone : 8595856547,
+            department : "Engineering"
+        }
+        ];
+    
+        users = [
+            {
+                username : 'admin',
+                password : 'admin'
+            }
+        ];
+
+        
   constructor() { 
-    const user = {
-       username : 'admin',
-       password : 'admin'
-    }
-    users.push(user);
-     const s = {
-       id : '2001',
-       title : 'suresh'
-    }
-
-    studentList.push(s);
-
-  const s2 = {
-       id : '2002',
-       title : 'kumar'
-    }
-studentList.push(s2);
-     localStorage.setItem('users', JSON.stringify(users));
-     localStorage.setItem('students',JSON.stringify(studentList));
+       
+     localStorage.setItem('users', JSON.stringify(this.users));
+     localStorage.setItem('students',JSON.stringify(this.studentsList));
 
   }
 intercept(req: HttpRequest<any>,next: HttpHandler): Observable<HttpEvent<any>> {
@@ -40,7 +74,7 @@ return of(null)
             .pipe(delay(500))
             .pipe(dematerialize());
 
-        function handleRoute() {
+        function handleRoute() :Observable<any>  {
             switch (true) {
                 case url.endsWith('/login') && method === 'POST':
                     return authenticate();
@@ -55,23 +89,31 @@ return of(null)
         }
 
         function getStudents() {
-              return ok(studentList);
+              return ok(this.studentsList);
         }
 
          function addStudent() {
              const student = body;
+             return ok();
         }
 
         function authenticate() {
-          const { username, password } = body;
-           const user = users.find(x => x.username === username && x.password === password);
-            if (!user) return error('Username or password is incorrect');
+            console.log("in fake autenticate");
+     
+         // const { username, password } = body;
+          //  const user = this.users.find(x => x.username === username && x.password === password);
+          /*  if (!user)  {
+                console.log("Username or password is incorrect");
+
+                return error('Username or password is incorrect');
+            }*/
             return ok({
-                username: user.username,
+                username: "admin",
                 token: 'fake-jwt-token'
             })
         }
  function ok(body?) {
+    console.log("ok response");
             return of(new HttpResponse({ status: 200, body }))
         }
 

@@ -32,7 +32,7 @@ public get currentUserValue() {
     }
 	
   authenticate(username, password)  {
-    console.log("in autenticate");
+    console.log("in authenticate service : autenticate");
 	const body = { username : username,password : password };
     return this.httpClient.post<any>('http://localhost:8080/login',body )
 		.pipe(map(user => {
