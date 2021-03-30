@@ -4,14 +4,14 @@
   <table class="table table-striped">
     <thead>
     <tr>
-      <th class="hidden">ID</th>
+      <th >REG ID</th>
       <th>NAME</th>
     </tr>
     </thead>
     <tbody>
     <tr *ngFor="let student of students">
-      <td class="hidden">{{student.id}}</td>
-      <td>{{student.title}}</td>
+      <td >{{student.id}}</td>
+      <td>{{student.fname}}</td>
       <td><button class="btn btn-success" (click)="deleteStudent(student)"> Delete</button>
         <button class="btn btn-success" (click)="UpdateStudent(student)" style="margin-left: 20px;"> Edit</button></td>
     </tr>

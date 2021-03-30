@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { HttpClientService, Student } from "../service/http-client.service";
+import { HttpClientService } from "../service/http-client.service";
+import { Student } from "./student";
 
 @Component({
   selector: "students",
@@ -8,13 +9,15 @@ import { HttpClientService, Student } from "../service/http-client.service";
   styleUrls: ["./student.component.css"]
 })
 export class StudentComponent implements OnInit {
-  public students = [];
+  public students=[];
+  title : string ;
   constructor(private  router : Router,private httpClientService: HttpClientService) {}
 
   handleSuccessfulResponse(response) {
      console.log(response);
-    this.students = response;
-    
+     
+    this.students =JSON.parse(response); 
+     console.log( this.students);
   }
 
   ngOnInit() {
@@ -26,7 +29,7 @@ export class StudentComponent implements OnInit {
 getStudents() : void{
  this.httpClientService
       .getStudents()
-      .subscribe((response) => this.handleSuccessfulResponse(response));
+      .subscribe(response => this.handleSuccessfulResponse(response));
  
 
 }
