@@ -1,10 +1,9 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
+import { Student } from "../student/student";
 
-export class Student {
-  constructor(public id: string, public title: string) {}
-}
+
 
 @Injectable({
   providedIn: "root"
