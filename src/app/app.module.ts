@@ -31,10 +31,10 @@ import { AddStudentComponent } from "./student/add-student.component";
     AddStudentComponent
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule,FormsModule],
-  providers: [HttpClientService, AuthenticationService,
+ 
  /* { provide:HTTP_INTERCEPTORS, useClass:BasicAuthHttpInterceptorService, multi:true },*/
-  { provide:HTTP_INTERCEPTORS, useClass:FakeHTTPInterceptorService, multi:true }
-  ],
+ // { provide:HTTP_INTERCEPTORS, useClass:FakeHTTPInterceptorService, multi:true },
+  providers: [HttpClientService, AuthenticationService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
