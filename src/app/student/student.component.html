@@ -18,7 +18,8 @@
       <td >{{student.dob}}</td>
       <td>{{student.active}}</td>
       <td>{{student.admittedOn}}</td>
-      <td><button class="btn btn-success" (click)="deleteStudent(student)"> Delete</button>
+      <button class="btn btn-success" (click)="viewStudent(student)"> View</button>
+      <td><button class="btn btn-success" (click)="deleteStudent(student)"  style="margin-left: 20px;"> Delete</button>
         <button class="btn btn-success" (click)="UpdateStudent(student)" style="margin-left: 20px;"> Edit</button></td>
     </tr>
     </tbody>
