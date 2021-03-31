@@ -5,12 +5,13 @@ import { Student } from "./student";
 
 @Component({
   selector: "students",
-  templateUrl: "./student.component.html",
+  templateUrl:"./student.component.html",
   styleUrls: ["./student.component.css"]
 })
 export class StudentComponent implements OnInit {
   public students=[];
   title : string ;
+  currentStudent : any;
   constructor(private  router : Router,private httpClientService: HttpClientService) {}
 
   handleSuccessfulResponse(response) {
@@ -32,6 +33,14 @@ getStudents() : void{
       .subscribe(response => this.handleSuccessfulResponse(response));
  
 
+}
+
+viewStudent  (student : Student) : void {
+   this.httpClientService.getStudentById(student.id)
+   .subscribe((response) =>  {
+      console.log(response);
+      this.currentStudent = response;
+   });
 }
     deleteStudent(student : Student) : void {
     
