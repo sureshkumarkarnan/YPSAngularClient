@@ -17,11 +17,11 @@ export class HttpClientService {
     return this.httpClient.get<Student[]>(this.baseUrl);
   }
 
-getStudentById ( id:number) {
+getStudentById ( id:string) {
   return this.httpClient.get<Student>(this.baseUrl + id);
 }
   deleteStudent(student : Student): Observable<any>{
-    return this.httpClient.delete(this.baseUrl + student.id);
+    return this.httpClient.delete(this.baseUrl + '/' + student.id);
   }
 
   createStudent(student:Student) {
