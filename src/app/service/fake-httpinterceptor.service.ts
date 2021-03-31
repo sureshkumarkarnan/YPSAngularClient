@@ -10,23 +10,29 @@ import { Student } from '../student/student';
 @Injectable()
 export class FakeHTTPInterceptorService implements HttpInterceptor {
 
-stringJson: any;
-stringObject: any;
   courseList = [
     {
       id: "1",
-      fname: "Java programming",
+      regId : "20211001",
+      dob : "2016-05-12",
+      fname: "siral suresh",
+      active : 1,
+      admittedOn : "2021-06-01",
       author: "Franc"
     },
     {
       id: "2",
-      fname: "Learn Typescript programming",
+      regId : "20211002",
+      dob : "2016-07-14",
+      admittedOn : "2021-05-01",
+      active : 1,
+      fname: "Adhiral suresh",
       author: "John"
     }
   ];
     
 constructor() { 
-this.stringJson = JSON.stringify(this.courseList);
+
   }
 
 intercept(req: HttpRequest<any>,next: HttpHandler): Observable<HttpEvent<any>> {
@@ -38,10 +44,10 @@ const { url, method, headers, body } = req;
 switch (true) {
                 case url.endsWith('/login') && method === 'POST':
                     return this.authenticate();
-                    case url.endsWith('/Students/') && method === 'GET':
+                    case url.endsWith('/Students') && method === 'GET':
                      {
                          console.log("in fake getStudents");
-                       return of(new HttpResponse({ status: 200, body: this.stringJson }));
+                       return of(new HttpResponse({ status: 200, body: this.courseList}));
         
                     }
                     case url.endsWith('/Students/') && method === 'POST':
