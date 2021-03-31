@@ -50,6 +50,12 @@ switch (true) {
                        return of(new HttpResponse({ status: 200, body: this.courseList}));
         
                     }
+                     case url.endsWith('/Students/{}') && method === 'GET':
+                     {
+                         console.log("in fake getStudents");
+                       return of(new HttpResponse({ status: 200, body: this.courseList}));
+        
+                    }
                     case url.endsWith('/Students/') && method === 'POST':
                     default:
                     // pass through any requests not handled above
