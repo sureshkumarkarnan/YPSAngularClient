@@ -9,7 +9,7 @@ import { Student } from "../student/student";
   providedIn: "root"
 })
 export class HttpClientService {
-  private baseUrl : string = 'http://localhost:8080/Students/';
+  private baseUrl : string = 'http://localhost:8080/Students';
   constructor(private httpClient: HttpClient) {}
 
   getStudents():Observable<any> {
