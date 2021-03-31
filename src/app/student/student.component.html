@@ -6,12 +6,18 @@
     <tr>
       <th >REG ID</th>
       <th>NAME</th>
+      <th>DATE OF BIRTH</th>
+      <th>ACTIVE</th>
+      <th>REGISTERED ON</th>
     </tr>
     </thead>
     <tbody>
     <tr *ngFor="let student of students">
-      <td >{{student.id}}</td>
+      <td >{{student.regId}}</td>
       <td>{{student.fname}}</td>
+      <td >{{student.dob}}</td>
+      <td>{{student.active}}</td>
+      <td>{{student.admittedOn}}</td>
       <td><button class="btn btn-success" (click)="deleteStudent(student)"> Delete</button>
         <button class="btn btn-success" (click)="UpdateStudent(student)" style="margin-left: 20px;"> Edit</button></td>
     </tr>

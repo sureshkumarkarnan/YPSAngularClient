@@ -16,7 +16,7 @@ export class StudentComponent implements OnInit {
   handleSuccessfulResponse(response) {
      console.log(response);
      
-    this.students =JSON.parse(response); 
+    this.students =response; 
      console.log( this.students);
   }
 
